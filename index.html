@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>A2 Visualisations</title>
+    <!-- Import Vega & Vega-Lite (does not have to be from CDN) -->
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
+
+    <!-- Import pure.css -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/purecss@2.0.3/build/pure-min.css"
+      integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ"
+      crossorigin="anonymous"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS file -->
+    <link rel="stylesheet" type="text/css" href="./styles.css" media="all" />
+  </head>
+
+  <body>
+    <div class="page">
+      <!-- pure grid group -->
+      <div class="pure-g">
+        <div class="pure-u-1-1 center title">
+          <h1 style="font-size: 48px">Unveiling YouTube</h1>
+          <p>
+            Discover the global YouTube landscape through data-driven
+            visualizations. Explore the distribution of channels, subscribers,
+            and categories across countries, and uncover intriguing insights
+            into YouTube's diverse ecosystem.
+          </p>
+        </div>
+      </div>
+      <!-- end pure grid group -->
+
+      <!-- pure grid group -->
+      <div class="pure-g">
+        <div class="pure-u-3-5">
+          <div style="padding-right: 30px; text-align: justify">
+            <h2>YouTube Channel Distribution</h2>
+            <p>
+              The symbol map on the right represents the distribution of
+              approximately <strong>1000 YouTube Channels</strong> up until
+              <strong>2022</strong>. Notably, <strong>America</strong> is the
+              only country that exceed the 50-300 range, with over
+              <strong>30%</strong> of the total channels. Follow closely by
+              <strong>India</strong> and <strong>Brazil</strong>, each boast
+              <strong>168</strong> and <strong>62</strong> YouTube channels,
+              respectively. <br /><br />
+              In contrast,
+              <strong>Australia</strong> houses only <strong>9</strong> out of
+              these 1000 channels. However, since channel ranking is based on
+              subscriber counts, it's imperative that we delve deeper into this
+              aspect to gain a more comprehensive understanding of the
+              ecosystem.
+            </p>
+          </div>
+        </div>
+        <div class="pure-u-2-5">
+          <div id="vis1" class="vis-container"></div>
+        </div>
+      </div>
+      <!-- end pure grid group -->
+
+      <!-- pure grid group -->
+      <div class="pure-g">
+        <div class="pure-u-3-5">
+          <div id="vis2" class="vis-container"></div>
+        </div>
+        <div class="pure-u-2-5">
+          <div style="text-align: justify">
+            <h2>Average Subscribers per Channel</h2>
+            <p>
+              It comes to no suprise that <strong>America</strong> leads in
+              total subscribers, given its significant number of channels. To
+              ensure a fair analysis, we shift our focus to the average number
+              of subscribers per channel. <br /><br />
+              Using this approach, countries with fewer YouTube channels tend to
+              exhibit higher average subscriber counts. For instance, countries
+              like <strong>Cuba</strong> and <strong>Venezuela</strong>, each
+              represented by only 1 channel within the top 1000, boast
+              remarkably high average subscribers per channel.
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- end pure grid group -->
+
+      <!-- pure grid group -->
+      <div class="pure-g">
+        <div class="pure-u-3-5">
+          <div id="vis3" class="vis-container"></div>
+        </div>
+        <div class="pure-u-2-5">
+          <div style="text-align: justify">
+            <h2>What if everyone has a YouTube Channel?</h2>
+            <p>
+              Fun fact: If everyone in <strong>America</strong> has a YouTube
+              channel, then each person will have
+              <strong>22</strong> subscribers. This is the highest among all the
+              other countries, indicating a significant level of engagement with
+              the platform. Followed by
+              <strong>United Arab Emirates</strong> and
+              <strong>United Kingdom</strong> of <strong>15</strong> and
+              <strong>14</strong> subscribers per capita respectively.
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- end pure grid group -->
+
+      <!-- pure grid group -->
+      <div class="pure-g">
+        <div class="pure-u-1-1">
+          <div style="text-align: center; margin-bottom: 10px">
+            <h1>Channels and Subscribers Distribution by Category</h1>
+            <p>
+              Having explored the global data on channels and subscribers for
+              each country, our next step is to examine their distribution
+              across various categories. Our focus will be on
+              <strong>America</strong> and <strong>India</strong>, as they have
+              a significant number of channels and subscribers globally.
+              Additionally, we will include <strong>Australia</strong> in our
+              analysis.
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- end pure grid group -->
+
+      <!-- pure grid group -->
+      <div class="pure-g">
+        <div class="pure-u-2-3">
+          <div id="bar1" class="vis-container"></div>
+        </div>
+        <div class="pure-u-1-3" style="text-align: justify">
+          <h2>Balance Distribution in America</h2>
+          <p>
+            The distribution of channels vs. subscribers in each category
+            appears relatively balanced with no significant differences.
+            <br /><br />
+            <strong>Entertainment</strong> and <strong>Music</strong> stand out
+            for their notably higher engagement compared to other categories. In
+            contrast, <strong>Education</strong> is one of the few categories
+            where the percentage of subscribers outweighs the number of channels
+            created within that category, which is a good sign and suggest that
+            more channels of this category should be created.
+          </p>
+        </div>
+      </div>
+      <!-- end pure grid group -->
+
+      <!-- pure grid group -->
+      <div class="pure-g">
+        <div class="pure-u-2-3">
+          <div id="bar2" class="vis-container"></div>
+        </div>
+        <div class="pure-u-1-3" style="text-align: justify">
+          <h2>Unbalance Distribution in India</h2>
+          <p>
+            <strong>Entertainment</strong> and <strong>Music</strong> is once
+            again the most prominent categories. However, there are more notable
+            disparities between channels and subscribers. For instance, there is
+            a highter percentage of channels producing content in
+            <strong>Entertainment</strong> compared to the subscriber
+            percentage. <br /><br />
+            On the otherhand, data in the <strong>Music</strong> category
+            suggest that there are a smaller number of channels, but each
+            channel tends to have a significantly higher number of subscribers
+          </p>
+        </div>
+      </div>
+      <!-- end pure grid group -->
+
+      <!-- pure grid group -->
+      <div class="pure-g">
+        <div class="pure-u-2-3">
+          <div id="bar3" class="vis-container"></div>
+        </div>
+        <div class="pure-u-1-3">
+          <h2>Distribution in Australia</h2>
+          <p>
+            Among the 9 channels from Australia that are part of the top 1000,
+            none belong to the <strong>Entertainment</strong> category, which
+            has shown substantial popularity elsewhere. <br /><br />
+            The distribution between channels and subscribers appears relatively
+            balanced, with
+            <strong>Gaming</strong> emerging as the most popular category.
+          </p>
+        </div>
+      </div>
+      <!-- end pure grid group -->
+
+      <!-- pure grid group -->
+      <div class="pure-g">
+        <div class="pure-u-1-1">
+          <div style="text-align: center; margin-bottom: 10px">
+            <h1>Growth Over The Year</h1>
+            <p>
+              The scatter plot depicts the evolution of the YouTube industry
+              from <strong>2005</strong> to <strong>2022</strong>, showcasing
+              the growth of YouTubers and content creators over the years. The
+              x-axis represents the year the channel created, the y-axis and
+              point sizes indicate the current number of subscribers and the
+              overall views the channels have accumulated until 2022. The graph
+              can be customized by adjusting the sliders below to alter the year
+              and the number of channels displayed.
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- end pure grid group -->
+
+      <!-- pure grid group -->
+      <div class="pure-g">
+        <div class="pure-u-1-1" style="text-align: center">
+          <div id="scatter"></div>
+        </div>
+      </div>
+      <!-- end pure grid group -->
+
+      <div class="container">
+        <div class="column">
+          <!-- Content for the first column -->
+          <p>
+            By adjusting the sliders, we observe that
+            <strong>Music</strong> stands out as one of the most dominant
+            categories among the top 100 YouTube channels, with
+            <strong>T-series</strong>, a music channel based in
+            <strong>India</strong>, being the most subscribed channel in the
+            world with over 200 million subscribers.
+          </p>
+        </div>
+        <div class="column">
+          <!-- Content for the second column -->
+          <p>
+            The data indicates that only three of the
+            top 100 channels were created after 2018.
+            Furthermore, as we extend the sliders to reveal more channels, more 
+            categories start to emerge,
+            with the <strong>Entertainment</strong>> category appearing to be the most prominent
+            among them.
+          </p>
+        </div>
+      </div>
+      <!-- end pure grid group -->
+    </div>
+    <!-- end page -->
+
+    <script type="text/javascript">
+      var vis1 = "./symbol_map.vg.json";
+      var vis2 = "./choropleth_per_youtuber.vg.json";
+      var vis3 = "./choropleth_per_capita.vg.json";
+      var bar1 = "./bar_category_usa.vg.json";
+      var bar2 = "./bar_category_india.vg.json";
+      var bar3 = "./bar_category_aus.vg.json";
+      var scatter = "./scatter_plot.vg.json";
+
+      vegaEmbed("#vis1", vis1, { actions: false });
+      vegaEmbed("#vis2", vis2, { actions: false });
+      vegaEmbed("#vis3", vis3, { actions: false });
+      vegaEmbed("#bar1", bar1, { actions: false });
+      vegaEmbed("#bar2", bar2, { actions: false });
+      vegaEmbed("#bar3", bar3, { actions: false });
+      vegaEmbed("#scatter", scatter, { actions: false });
+    </script>
+  </body>
+</html>

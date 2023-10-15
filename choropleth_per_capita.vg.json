@@ -1,0 +1,182 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Subscribers per Capita by Country (2022)",
+  "width": 495,
+  "height": 250,
+  "projection": {
+    "type": "equalEarth"
+  },
+  "data": {
+    "url": "./ne_110m.topojson",
+    "format": {
+      "type": "topojson",
+      "feature": "ne_110m_admin_0_countries"
+    }
+  },
+  "layer": [
+    {
+      "transform": [
+        {
+          "calculate": "'Data is not available in ' + datum.properties.NAME",
+          "as": "note"
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "fill": "lightgray",
+        "stroke": "white"
+      },
+      "encoding": {
+        "tooltip": {
+          "field": "note"
+        }
+      }
+    },
+    {
+      "data": {
+        "url": "./ne_110m.topojson",
+        "format": {
+          "type": "topojson",
+          "feature": "ne_110m_admin_0_countries"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "lightgray",
+        "stroke": "white"
+      }
+    },
+    {
+      "data": {
+        "url": "./oceans.topojson",
+        "format": {
+          "type": "topojson",
+          "feature": "oceans"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "skyblue"
+      }
+    },
+    {
+      "data": {
+        "url": "./ne_110m.topojson",
+        "format": {
+          "type": "topojson",
+          "feature": "ne_110m_graticules_30"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": null,
+        "stroke": "lightgray"
+      }
+    },
+    {
+      "transform": [
+        {
+          "calculate": "'Data is not available in ' + datum.properties.NAME",
+          "as": "note"
+        }
+      ],
+      "mark": {"type": "geoshape", "fill": "lightgray", "stroke": "white"},
+      "encoding": {"tooltip": {"field": "note"}}
+    },
+    {
+      "transform": [
+        {
+          "lookup": "properties.NAME",
+          "from": {
+            "data": {
+              "url": "./youtube_filtered.csv"
+            },
+            "key": "Country",
+            "fields": [
+              "subscribers",
+              "Population"
+            ]
+          }
+        },
+        {
+          "calculate": "datum.subscribers/datum.Population",
+          "as": "Subscribers per Capita"
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "stroke": "black",
+        "strokeWidth": 0.5
+      },
+      "encoding": {
+        "color": {
+          "field": "Subscribers per Capita",
+          "type": "quantitative",
+          "title": "Subscribers per Capita",
+          "scale": {
+            "scheme": "reds"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "properties.NAME",
+            "type": "nominal",
+            "title": "Country"
+          },
+          {
+            "field": "Population",
+            "type": "quantitative",
+            "title": "Population",
+            "format": ",d"
+          },
+          {
+            "field": "subscribers",
+            "type": "quantitative",
+            "title": "Total Subscribers",
+            "format": ",d"
+          },
+          {
+            "field": "Subscribers per Capita",
+            "type": "quantitative",
+            "title": "Subscribers per Capita",
+            "format": ",d"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "url": "./youtube_filtered.csv"
+      },
+      "mark": {
+        "type": "text",
+        "dy": 10,
+        "fontSize": 13,
+        "baseline": "middle",
+        "fontStyle": "italic"
+      },
+      "encoding": {
+        "text": {
+          "field": "Country",
+          "type": "nominal"
+        },
+        "longitude": {
+          "field": "Longitude"
+        },
+        "latitude": {
+          "field": "Latitude"
+        },
+        "color": {
+          "value": "black"
+        },
+        "opacity": {
+          "condition": {
+            "test": "datum['Country'] == 'United States of America' || datum['Country'] == 'United Arab Emirates' || datum['Country'] == 'United Kingdom'",
+            "value": 1
+          },
+          "value": 0
+        }
+      }
+    }
+  ]
+}

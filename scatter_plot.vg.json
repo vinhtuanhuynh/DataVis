@@ -1,0 +1,134 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 800,
+  "height": 500,
+  "data": {
+    "url": "./youtube.csv"
+  },
+  "params": [
+    {
+      "name": "Rank_Above",
+      "value": 100,
+      "bind": {
+        "input": "range",
+        "min": 50,
+        "max": 1000,
+        "step": 50,
+        "name": "Channels in Top: "
+      }
+    },
+    {
+      "name": "Year_above",
+      "value": 2005,
+      "bind": {
+        "input": "range",
+        "min": 2005,
+        "max": 2023,
+        "step": 1,
+        "name": "Year: "
+      }
+    }
+  ],
+  "transform": [
+    {
+      "filter": "datum.rank <= Rank_Above" 
+    },
+    {
+      "filter": {"timeUnit": "year", "field": "created_year", "gt": "Year_above"}
+    },
+    {
+      "filter": "datum.category !== 'nan'"
+    }
+  ],
+  "mark": "point",
+  "encoding": {
+    "x": {
+      "field": "created_year",
+      "timeUnit": "year",
+      "type": "temporal",
+      "title": "Created Year",
+      "axis": {
+        "format": "%Y",
+        "titleFontSize": 15,
+        "titlePadding": 25
+      },
+      "scale": {"domain": ["Year_above", 2023]}
+    },
+    "y": {
+      "field": "subscribers",
+      "type": "quantitative",
+      "title": "Subscribers",
+      "axis": {
+        "format": ".2s",
+        "titlePadding": 25,
+        "titleFontSize": 15,
+        "tickCount": 5
+        
+      },
+      "scale": {"type": "log", "domain": [10000000, 300000000], "base": 2} 
+
+    },
+    "size": {
+      "field": "video views",
+      "type": "quantitative",
+      "title": "Video views",
+      "scale": {
+        "domain": [
+          50000000000,
+          100000000000,
+          150000000000,
+          200000000000
+        ],
+        "range": [
+          200,
+          300,
+          400,
+          500,
+          700
+        ],
+        "type": "threshold"
+      },
+      "legend": {"format": ",.0f"}
+    },
+    "color": {
+      "field": "category",
+      "type": "nominal",
+      "title": "Category"
+    },
+    "fill": {
+      "field": "category",
+      "type": "nominal",
+      "title": "Category"
+    },
+    "tooltip": [
+      {
+        "field": "Youtuber",
+        "type": "nominal",
+        "title": "Channel Name"
+      },
+      {
+        "field": "subscribers",
+        "type": "quantitative",
+        "title": "Subscribers",
+        "format": ".2s"
+      },
+      {
+        "field": "video views",
+        "type": "quantitative",
+        "title": "Video Views",
+        "format": ","
+      },
+      {
+        "field": "created_year",
+        "type": "temporal",
+        "title": "Created Year",
+        "format": "%Y"
+      },
+      {
+        "field": "category",
+        "type": "nominal",
+        "title": "Category"
+      }
+    ]
+  }
+}

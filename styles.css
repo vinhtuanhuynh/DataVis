@@ -1,0 +1,50 @@
+body * {
+  font-family: 'Times New Roman', Times, serif;
+}
+
+h1 {
+  font-weight: 900;
+}
+
+.title {
+  text-align: center;
+}
+
+body {
+  background-color:white;
+}
+
+.page {
+  width: 1148px;
+  background-color: white;
+  margin: auto; /* horizontally move the div to the center */
+  padding: 40px;
+}
+
+.vis-container {
+  max-width: 450px;
+  
+}
+
+.pure-g {
+  margin-bottom: 40px;
+}
+
+p {
+  font-size: 18px;
+}
+
+.description {
+  text-align: justify;
+}
+
+
+.container {
+  display: flex; /* Set the container as flex */
+}
+
+.column {
+  flex: 1; 
+  padding: 20px; /* Adjust padding as needed */
+  text-align: justify;
+}

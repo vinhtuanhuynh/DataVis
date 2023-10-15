@@ -1,0 +1,158 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 450,
+  "height": 250,
+  "title": "Global Distribution of 1000 YouTube Channels (2022)",
+  "projection": {
+    "type": "equalEarth"
+  },
+  "data": {
+    "url": "./ne_110m.topojson",
+    "format": {
+      "type": "topojson",
+      "feature": "ne_110m_admin_0_countries"
+    }
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "./ne_110m.topojson",
+        "format": {
+          "type": "topojson",
+          "feature": "ne_110m_admin_0_countries"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "lightgray",
+        "stroke": "white"
+      }
+    },
+    {
+      "data": {
+        "url": "./oceans.topojson",
+        "format": {
+          "type": "topojson",
+          "feature": "oceans"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "skyblue"
+      }
+    },
+    {
+      "data": {
+        "url": "./ne_110m.topojson",
+        "format": {
+          "type": "topojson",
+          "feature": "ne_110m_graticules_30"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": null,
+        "stroke": "lightgray"
+      }
+    },
+    {
+      "transform": [
+        {
+          "calculate": "'Data is not available in ' + datum.properties.NAME",
+          "as": "note"
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "fill": "lightgray",
+        "stroke": "white"
+      },
+      "encoding": {
+        "tooltip": {
+          "field": "note"
+        }
+      }
+    },
+    {
+      "data": {
+        "url": "./youtube_filtered.csv"
+      },
+      "mark": {
+        "type": "circle"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "Longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "Latitude",
+          "type": "quantitative"
+        },
+        "size": {
+          "field": "Channel_count",
+          "type": "quantitative",
+          "title": "Channel Count",
+          "scale": {
+            "type": "threshold",
+            "domain": [
+              10,
+              50,
+              300
+            ]
+          }
+        },
+        "color": {
+          "value": "red"
+        },
+        "tooltip": [
+          {
+            "field": "Country",
+            "type": "nominal",
+            "title": "Country"
+          },
+          {
+            "field": "Channel_count",
+            "type": "quantitative",
+            "title": "YouTube Channel Count",
+            "format": ",d"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "url": "./youtube_filtered.csv"
+      },
+      "mark": {
+        "type": "text",
+        "fontSize": 13,
+        "align": "left",
+        "baseline": "middle",
+        "fontStyle": "italic"
+      },
+      "encoding": {
+        "text": {
+          "field": "Country",
+          "type": "nominal"
+        },
+        "longitude": {
+          "field": "Longitude"
+        },
+        "latitude": {
+          "field": "Latitude"
+        },
+        "color": {
+          "value": "black"
+        },
+        "opacity": {
+          "condition": {
+            "test": "datum['Country'] == 'United States of America' || datum['Country'] == 'Brazil' || datum['Country'] == 'Australia' || datum['Country'] == 'India'",
+            "value": 1
+          },
+          "value": 0
+        }
+      }
+    }
+  ]
+}
